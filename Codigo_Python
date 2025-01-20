@@ -1,2 +1,21 @@
-git add codigo-de-python/
+import pandas as pd
+
+def format_date_column(input_file, output_file):
+    # Lê o arquivo Excel consolidado
+    df = pd.read_excel(input_file)
+
+    # Verifica se a coluna 'sale_date' existe
+    if 'sale_date' in df.columns:
+        # Converte a coluna 'sale_date' para string, mantendo apenas a parte da data
+        df['sale_date'] = df['sale_date'].dt.strftime('%Y-%m-%d')
+
+    # Salva o DataFrame formatado em um novo arquivo Excel
+    df.to_excel(output_file, index=False)
+
+    print("Formatação concluída. Dados salvos em:", output_file)
+
+if __name__ == "__main__":
+    input_file = r"C:\Users\Pamela e Rick\Documents\Projeto_Analise_de_Dados\Data\output\brazil_consolidated_data.xlsx"
+    output_file = r"C:\Users\Pamela e Rick\Documents\Projeto_Analise_de_Dados\Data\output\brazil_formatted_data.xlsx"
+    format_date_column(input_file, output_file)
 
